@@ -16,6 +16,9 @@ def main():
     rss_list_path = config['config']['list']
     daily_note = config['config']['daily_note']
     db_path = config['config']['sqlite']
+    tag = ''
+    if 'tag' in config['config']:
+        tag = config['config']['tag']
 
     args = parser.parse_args()
 
@@ -45,7 +48,15 @@ def main():
     title = str(yesterday.year).zfill(4) + '-' + str(yesterday.month).zfill(2) + '-' + str(yesterday.day).zfill(2)
     note_path = os.path.join(daily_note, title + ".md")
     print(note_path)
+
+    if os.path.isfile(note_path)==False:
+        new_note = True
+    else:
+        new_note = False
+
     note=codecs.open(note_path, 'a', 'utf-8')
+    if new_note and tag != '':
+        note.write('#' + tag + '\n')
 
     for rss_list_item in rss_list:
         d = feedparser.parse(rss_list_item)
