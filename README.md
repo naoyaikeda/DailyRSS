@@ -9,6 +9,7 @@ Obsidianとの併用が想定されています。
 list=lists/default.list
 daily_note=<RSSのリストのパス>
 sqlite=lists/rss.db
+tag=<デフォルトタグ>
 ```
 
 sqliteは同一エントリを多重処理するのを防ぐために用いられます。
