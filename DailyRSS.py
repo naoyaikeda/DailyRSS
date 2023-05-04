@@ -1,16 +1,23 @@
 from configparser import ConfigParser
 import feedparser
-from datetime import datetime, timedelta
+import datetime
 import os
 import codecs
 import sqlite3
+import argparse
 
 def main():
+    parser = argparse.ArgumentParser(description = 'DailyRSS')
+
+    parser.add_argument('--date')
+
     config = ConfigParser()
     config.read('DailyRss.conf')
     rss_list_path = config['config']['list']
     daily_note = config['config']['daily_note']
     db_path = config['config']['sqlite']
+
+    args = parser.parse_args()
 
     conn = sqlite3.connect(db_path)
     cur=conn.cursor()
@@ -26,9 +33,14 @@ def main():
     f = open(rss_list_path, 'rt')
     rss_list = f.readlines()
     f.close()
-    now = datetime.now()
-    oneday = timedelta(days=1)
+    now = datetime.datetime.now()
+    oneday = datetime.timedelta(days=1)
+
     yesterday = now - oneday
+
+    if args.date:
+        scan_date = datetime.datetime.strptime(args.date, '%Y-%m-%d')
+        yesterday = scan_date
 
     title = str(yesterday.year).zfill(4) + '-' + str(yesterday.month).zfill(2) + '-' + str(yesterday.day).zfill(2)
     note_path = os.path.join(daily_note, title + ".md")
