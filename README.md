@@ -11,6 +11,8 @@ daily_note=<RSSのリストのパス>
 sqlite=lists/rss.db
 ```
 
+sqliteは同一エントリを多重処理するのを防ぐために用いられます。
+
 ## コマンドライン引数
 
 python DailyRSS.py --date yyyy-MM-dd
