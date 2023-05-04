@@ -10,3 +10,9 @@ list=lists/default.list
 daily_note=<RSSのリストのパス>
 sqlite=lists/rss.db
 ```
+
+## コマンドライン引数
+
+python DailyRSS.py --date yyyy-MM-dd
+
+--dateオプションをつけると任意の日付を対象にできます。
