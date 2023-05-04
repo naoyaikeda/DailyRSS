@@ -33,7 +33,7 @@ def main():
     title = str(yesterday.year).zfill(4) + '-' + str(yesterday.month).zfill(2) + '-' + str(yesterday.day).zfill(2)
     note_path = os.path.join(daily_note, title + ".md")
     print(note_path)
-    note=codecs.open(note_path, 'w', 'utf-8')
+    note=codecs.open(note_path, 'a', 'utf-8')
 
     for rss_list_item in rss_list:
         d = feedparser.parse(rss_list_item)
