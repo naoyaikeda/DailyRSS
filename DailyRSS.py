@@ -1,10 +1,10 @@
 from configparser import ConfigParser
-import feedparser
+import argparse
+import codecs
 import datetime
 import os
-import codecs
 import sqlite3
-import argparse
+import feedparser
 
 def main():
     parser = argparse.ArgumentParser(description = 'DailyRSS')
@@ -49,7 +49,7 @@ def main():
     note_path = os.path.join(daily_note, title + ".md")
     print(note_path)
 
-    if os.path.isfile(note_path)==False:
+    if not os.path.isfile(note_path):
         new_note = True
     else:
         new_note = False
